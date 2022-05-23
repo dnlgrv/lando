@@ -1,0 +1,6 @@
+*.ez
+_build
+deps
+erl_crash.dump
+releases
+tmp
