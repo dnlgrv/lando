@@ -8,8 +8,7 @@ defmodule Lando.Application do
   @impl true
   def start(_type, _args) do
     children = [
-      # Starts a worker by calling: Lando.Worker.start_link(arg)
-      # {Lando.Worker, arg}
+      Lando.Endpoint
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
