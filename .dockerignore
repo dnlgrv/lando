@@ -1,4 +1,5 @@
 *.ez
+.infra
 _build
 deps
 erl_crash.dump
