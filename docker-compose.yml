@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  app:
+    build: .
+    hostname: "lando_app.host"
+    environment:
+      - RELEASE_COOKIE=secret
+    ports:
+      - 4000:4000
+
+  child:
+    build: .
+    hostname: "lando_child.host"
+    environment:
+      - RELEASE_COOKIE=secret
+    ports:
+      - 4001:4000

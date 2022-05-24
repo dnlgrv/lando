@@ -7,8 +7,15 @@ defmodule Lando.Application do
 
   @impl true
   def start(_type, _args) do
+    topologies = [
+      local: [
+        strategy: Cluster.Strategy.Gossip
+      ]
+    ]
+
     children = [
-      Lando.Endpoint
+      Lando.Endpoint,
+      {Cluster.Supervisor, [topologies, [name: Lando.ClusterSupervisor]]}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
