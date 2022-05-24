@@ -2,6 +2,7 @@ defmodule Lando.Router do
   use Plug.Router
 
   plug(:match)
+  plug(Plug.Logger)
   plug(:dispatch)
 
   @template EEx.compile_file(Path.join([File.cwd!(), "lib/lando/templates/index.html.eex"]))
