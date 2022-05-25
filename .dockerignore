@@ -1,4 +1,5 @@
 *.ez
+.elixir_ls
 .infra
 _build
 deps
