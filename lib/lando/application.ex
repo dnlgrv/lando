@@ -7,11 +7,7 @@ defmodule Lando.Application do
 
   @impl true
   def start(_type, _args) do
-    topologies = [
-      local: [
-        strategy: Cluster.Strategy.Gossip
-      ]
-    ]
+    topologies = Application.get_env(:lando, :topologies, [])
 
     children = [
       Lando.Endpoint,
