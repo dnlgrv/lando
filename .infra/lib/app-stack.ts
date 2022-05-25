@@ -50,6 +50,7 @@ export class AppStack extends cdk.NestedStack {
     listener.addTargets("Target", {
       port: 80,
       targets: [service],
+      deregistrationDelay: cdk.Duration.seconds(5),
     });
   }
 
