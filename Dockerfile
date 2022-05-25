@@ -26,6 +26,8 @@ RUN mix release
 FROM ${RUNNER_IMAGE} as runner
 
 RUN apk add --no-cache \
+  curl \
+  jq \
   libstdc++ \
   ncurses \
   openssl
