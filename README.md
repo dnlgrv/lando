@@ -13,16 +13,17 @@ applicable to most web apps, and involves:
 - Creating a load balancer that routes requests to the container
 - Setting a secret from AWS Systems Manager on the running container as an environment variable
 
-Still left to do, but is a nice to have, is to connect multiple ECS tasks using
-[libcluster](https://github.com/bitwalker/libcluster). Some examples of this
-being done before are
-[here](https://github.com/pro-football-focus/libcluster_ecs) and
-[here](https://github.com/felipeloha/elixir-ecs).
+If you decide to run multiple tasks for the app service (by setting desiredCount
+to >1 for the service) then through a configured
+[libcluster](https://github.com/bitwalker/libcluster) topology, each of the
+tasks will connect to each other's node. Thanks to
+[https://github.com/felipeloha/elixir-ecs](https://github.com/felipeloha/elixir-ecs)
+for showing the way to do this.
 
-It's also not clear whether using nested stacks is preferrable over separate
-stacks which can be deployed independently, as with nested stacks you have to
-deploy your entire infrastructure with each change. Definitely something else to
-look into.
+It's not clear whether using nested stacks is preferrable over separate stacks
+which can be deployed independently, as with nested stacks you have to deploy
+your entire infrastructure with each change. Definitely something else to look
+into.
 
 ## Running locally
 
