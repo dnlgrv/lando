@@ -4,6 +4,7 @@ import * as ecr from "aws-cdk-lib/aws-ecr";
 import * as ecs from "aws-cdk-lib/aws-ecs";
 import * as logs from "aws-cdk-lib/aws-logs";
 import * as ssm from "aws-cdk-lib/aws-ssm";
+import * as discovery from "aws-cdk-lib/aws-servicediscovery";
 import { Construct } from "constructs";
 
 import { AppStack } from "./app-stack";
@@ -37,11 +38,28 @@ export class LandoStack extends cdk.Stack {
       vpc,
     });
 
+    const namespace = new discovery.PrivateDnsNamespace(this, "Namespace", {
+      name: "lando-ns",
+      vpc,
+    });
+
+    const discoveryService = namespace.createService("DiscoveryService", {
+      dnsRecordType: discovery.DnsRecordType.A,
+      dnsTtl: cdk.Duration.seconds(10),
+      routingPolicy: discovery.RoutingPolicy.MULTIVALUE,
+    });
+
     const { loadBalancer } = new AppStack(this, "App", {
       cluster,
+      discoveryService,
       logDriver,
       repo,
       secrets: {
+        cookie: ssm.StringParameter.fromSecureStringParameterAttributes(
+          this,
+          "Cookie",
+          { parameterName: `/lando/${props.stage}/cookie` }
+        ),
         secret: ssm.StringParameter.fromSecureStringParameterAttributes(
           this,
           "Secret",

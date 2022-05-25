@@ -55,6 +55,9 @@ yarn
 # to demonstrate setting secrets
 aws ssm put-parameter --name "/lando/dev/secret" --type "SecureString" --value "My secret"
 
+# release cookie for connecting multiple task nodes
+aws ssm put-parameter --name "/lando/dev/cookie" --type "SecureString" --value "cookie-monster"
+
 # deploy CloudFormation stack
 yarn cdk deploy
 ```
