@@ -15,5 +15,7 @@
       <li><%= connected_node %></li>
     <% end %>
   </ul>
+
+  <p>Secret: <%= Application.get_env(:lando, :secret) %></p>
 </body>
 </html>
